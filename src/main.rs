@@ -14,7 +14,7 @@ async fn main() {
             None => Response::builder().body(String::from("This HTTP triggered function executed successfully. Pass a name in the query string for a personalized response.")),
         });
 
-        let goodbye = warp::get()
+    let goodbye = warp::get()
         .and(warp::path("api"))
         .and(warp::path("goodbye"))
         .and(warp::query::<HashMap<String, String>>())
@@ -29,5 +29,7 @@ async fn main() {
         Err(_) => 3000,
     };
 
-    warp::serve(hello.or(goodbye)).run((Ipv4Addr::LOCALHOST, port)).await;
+    warp::serve(hello.or(goodbye))
+        .run((Ipv4Addr::LOCALHOST, port))
+        .await;
 }
